@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation(libs.guava)
+    api(libs.money)
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+eclipse {
+    classpath {
+        baseSourceOutputDir = file('build/eclipse')
+    }
+}
