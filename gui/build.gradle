@@ -1,0 +1,23 @@
+plugins {
+    id 'java-library'
+    id 'eclipse'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    api project(':services')
+    implementation(libs.javafx)
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+eclipse {
+    classpath {
+        baseSourceOutputDir = file('build/eclipse')
+    }
+}
