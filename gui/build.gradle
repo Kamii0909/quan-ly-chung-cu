@@ -8,8 +8,8 @@ repositories {
 }
 
 dependencies {
-    api(libs.guava)
-    api(libs.money)
+    api project(':services')
+    implementation(libs.javafx)
 }
 
 tasks.named('test') {

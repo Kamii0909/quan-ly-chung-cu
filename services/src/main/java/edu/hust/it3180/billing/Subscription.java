@@ -2,9 +2,10 @@ package edu.hust.it3180.billing;
 
 import java.util.Optional;
 
+import com.google.common.collect.ImmutableList;
+
 import edu.hust.it3180.Apartment;
 import edu.hust.it3180.billing.fee.RecurringFee;
-import edu.hust.it3180.billing.time.BillingPeriod;
 
 /**
  * Representing the RecurringFee an apartment has/had.
@@ -18,9 +19,19 @@ public interface Subscription {
      * The first BillingPeriod this apartment was charged.
      */
     BillingPeriod from();
+
+    /**
+     * If this RecurringFee is currently applied. 
+     */
+    boolean isOngoing();
     
     /**
      * The last (if any) BillingPeriod this apartment was charged.
      */
     Optional<BillingPeriod> to();
+    
+    /**
+     * List of bills issued to this apartment.
+     */
+    ImmutableList<Bill> bills();
 }

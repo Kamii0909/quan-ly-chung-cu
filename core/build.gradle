@@ -8,8 +8,7 @@ repositories {
 }
 
 dependencies {
-    api(libs.guava)
-    api(libs.money)
+    api project(':services')
 }
 
 tasks.named('test') {

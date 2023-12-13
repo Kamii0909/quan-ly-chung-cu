@@ -5,7 +5,7 @@ package edu.hust.it3180.billing.fee;
  * apartment manager.
  */
 public interface Fee {
-    String description(); 
-
+    String description();
+    
     boolean isCompulsory();
 }
