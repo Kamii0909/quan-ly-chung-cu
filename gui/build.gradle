@@ -1,6 +1,7 @@
 plugins {
-    id 'java-library'
+    id 'application'
     id 'eclipse'
+    id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
@@ -8,12 +9,25 @@ repositories {
 }
 
 dependencies {
-    api project(':services')
-    //implementation(libs.javafx)
+    implementation project(':services')
+    // implementation(libs.javafx)
+    implementation 'org.openjfx:javafx-fxml:21'
+    implementation 'org.openjfx:javafx-controls:21'
+    implementation 'org.openjfx:javafx-base:21'
+    implementation 'org.openjfx:javafx-graphics:21'
+}
+
+application {
+    mainClass = 'edu.hust.it3180.Main'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+javafx {
+    version = 21
+    modules = ['javafx.fxml', 'javafx.controls']
 }
 
 eclipse {
