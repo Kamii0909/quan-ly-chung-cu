@@ -9,7 +9,7 @@ repositories {
 
 dependencies {
     api project(':services')
-    implementation(libs.javafx)
+    //implementation(libs.javafx)
 }
 
 tasks.named('test') {
