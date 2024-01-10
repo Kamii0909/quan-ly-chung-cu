@@ -47,7 +47,7 @@
                                 <Insets />
                             </VBox.margin>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Danh sách hộ khẩu" textFill="BLACK">
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showHoKhau" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Danh sách hộ khẩu" textFill="BLACK">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -72,8 +72,13 @@
                                     <String fx:value="Khoan tu nguyen" />
                                 </FXCollections>
                             </items>
+                            <style>
+                                -fx-font-size: 18px;
+                                -fx-text-fill: #000000;
+                                -fx-font-weight: bold;
+                            </style>
                         </ComboBox>
-                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Thanh toán" textFill="BLACK">
+                        <Button alignment="BASELINE_LEFT" onAction="#showThanhToan" mnemonicParsing="false" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Thanh toán" textFill="BLACK">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>
@@ -88,7 +93,7 @@
                                 <Insets />
                             </VBox.margin>
                         </Button>
-                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Thống kê" textFill="BLACK">
+                        <Button alignment="BASELINE_LEFT" onAction="#showThongKe" mnemonicParsing="false" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Thống kê" textFill="BLACK">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>

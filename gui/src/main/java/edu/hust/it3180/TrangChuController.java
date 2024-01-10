@@ -93,7 +93,6 @@ public class TrangChuController implements Initializable {
         }
     }
     private void showPhiDienNuoc() {
-
     }
     private void showKhoanTuNguyen() {
         application.getChildren().clear();
@@ -101,8 +100,43 @@ public class TrangChuController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("KhoanTuNguyenView.fxml"));
             Node KhoanTuNguyen = loader.load();
             application.getChildren().add(KhoanTuNguyen);
-
             setAnchorConstraint(KhoanTuNguyen);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void showThanhToan() {
+        application.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThanhToanView.fxml"));
+            Node ThanhToan = loader.load();
+            application.getChildren().add(ThanhToan);
+            setAnchorConstraint(ThanhToan);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void showThongKe() {
+//        application.getChildren().clear();
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThongKeView.fxml"));
+//            Node ThongKe = loader.load();
+//            application.getChildren().add(ThongKe);
+//            setAnchorConstraint(ThongKe);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    @FXML
+    private void showHoKhau() {
+        application.getChildren().clear();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HoKhauView.fxml"));
+            Node HoKhau = loader.load();
+            application.getChildren().add(HoKhau);
+            setAnchorConstraint(HoKhau);
         } catch (IOException e) {
             e.printStackTrace();
         }
