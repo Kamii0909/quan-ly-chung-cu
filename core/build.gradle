@@ -6,9 +6,18 @@ repositories {
     mavenCentral()
 }
 
+ext {
+    boot = '[3.0.0, 3.2.0]'
+    hypersistence = '3.7.+'
+}
+
 dependencies {
     api project(':services')
+    implementation "org.springframework.boot:spring-boot-starter:${boot}"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa:${boot}"
+    implementation "org.springframework.boot:spring-boot-starter-json:${boot}"
 
+    implementation "io.hypersistence:hypersistence-utils-hibernate-63:${hypersistence}"
 }
 
 tasks.named('test') {
