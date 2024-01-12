@@ -12,7 +12,7 @@ public interface ApartmentBillingStatus {
      * the billing system would look through this list and generate corresponding
      * bills appropriate with time.
      */
-    ImmutableList<Fee> currentFees();
+    ImmutableList<? extends Fee> currentFees();
     
     /**
      * All bills (including settled/fully paid) ones billed to this apartment. Note
@@ -20,14 +20,14 @@ public interface ApartmentBillingStatus {
      * more bills are added after this method returns, the returned list won't
      * contain new bills.
      */
-    ImmutableList<Bill> bills();
+    ImmutableList<? extends Bill> bills();
     
     /**
      * Currently unsettled bills. Note that this is a snapshot of the underlying
      * values, not a view. If for example, more bills are added after this method
      * returns, the returned list won't contain new bills.
      */
-    ImmutableList<Bill> pendingBills();
+    ImmutableList<? extends Bill> pendingBills();
     
     /**
      * All subscription tied to this apartment, including concluded ones. Note that
@@ -35,7 +35,7 @@ public interface ApartmentBillingStatus {
      * subscription are added after this method returns, the returned list won't
      * contain new ones.
      */
-    ImmutableList<Subscription> subscriptions();
+    ImmutableList<? extends Subscription> subscriptions();
     
     /**
      * All subscription tied to this apartment, only ongoing ones. Note that this is
@@ -43,7 +43,7 @@ public interface ApartmentBillingStatus {
      * subscription are added after this method returns, the returned list won't
      * contain new ones.
      */
-    ImmutableList<Subscription> ongoingSubscription();
+    ImmutableList<? extends Subscription> ongoingSubscription();
     
     /**
      * The last date this Apartment BillingStatus was calculated. Generally serves

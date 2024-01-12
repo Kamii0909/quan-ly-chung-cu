@@ -22,19 +22,19 @@ public interface ContractStatus {
      * @return a mutable list containing the residency records. Changes to the list
      *         will be visible. 
      */
-    List<ResidencyRecord> mutableResidencyRecords();
+    List<? extends ResidencyRecord> mutableResidencyRecords();
     
     /**
      * Past residents records
      * 
      * @return empty list if none found
      */
-    ImmutableList<ResidencyRecord> residencyRecords();
+    ImmutableList<? extends ResidencyRecord> residencyRecords();
     
     /**
      * @return the current Resident, null if none
      */
-    Optional<ResidencyRecord> currentResident();
+    Optional<? extends ResidencyRecord> currentResident();
     
     /**
      * End the current ResidencyRecord at today, append to

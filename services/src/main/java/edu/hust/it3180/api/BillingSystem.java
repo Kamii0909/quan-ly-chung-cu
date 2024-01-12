@@ -111,4 +111,14 @@ public interface BillingSystem {
      * Returns all Fee currently applied to a specific BillingPeriod.
      */
     ImmutableList<Fee> ongoingFee(BillingPeriod billingPeriod);
+    
+    /**
+     * Remove fee(s) from the list of currently ongoing fees, starting from
+     * {@code from} (bills will not be generated for this fee in {@code from})
+     * <p>
+     * **IMPORTANT** TODO: If from is in the past (or current BillingPeriod), how do
+     * we deal with it? For now, just fail the call, the manager will deal with it
+     * manually irl.
+     */
+    void removeFee(Predicate<Fee> whichFee, BillingPeriod from);
 }
