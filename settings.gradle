@@ -1,7 +1,5 @@
 rootProject.name = "apartment-management"
 
-include('core', 'services', 'gui')
-
 dependencyResolutionManagement {
     versionCatalogs {
         libs {
@@ -43,3 +41,5 @@ dependencyResolutionManagement {
         }
     }
 }
+
+include('core', 'services', 'gui')

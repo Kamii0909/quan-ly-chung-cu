@@ -14,25 +14,30 @@ import edu.hust.it3180.billing.Bill;
 import edu.hust.it3180.billing.BillingPeriod;
 import edu.hust.it3180.billing.fee.Fee;
 import edu.hust.it3180.billing.payment.Payment;
+import edu.hust.it3180.core.apartment.ApartmentRepository;
+import edu.hust.it3180.core.apartment.DefaultApartment;
 
 public class BillingSystemImpl implements BillingSystem {
     
+    private final ApartmentRepository apartmentRepository;
+    
+    public BillingSystemImpl(ApartmentRepository apartmentRepository) {
+        this.apartmentRepository = apartmentRepository;
+    }
+    
     @Override
     public void register(Apartment apartment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'register'");
+        apartmentRepository.save(DefaultApartment.asDefaultImpl(apartment));
     }
     
     @Override
     public void unregister(Apartment apartment) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'unregister'");
+        apartmentRepository.delete(DefaultApartment.asDefaultImpl(apartment));
     }
     
     @Override
     public ImmutableList<Apartment> trackingApartments() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'trackingApartments'");
+        return ImmutableList.copyOf(apartmentRepository.findAll());
     }
     
     @Override
@@ -81,6 +86,12 @@ public class BillingSystemImpl implements BillingSystem {
     public ImmutableList<Fee> ongoingFee(BillingPeriod billingPeriod) {
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'ongoingFee'");
+    }
+
+    @Override
+    public void removeFee(Predicate<Fee> whichFee, BillingPeriod from) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'removeFee'");
     }
     
 }
