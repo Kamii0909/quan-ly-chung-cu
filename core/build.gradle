@@ -1,6 +1,5 @@
 plugins {
     id 'java-library'
-    id 'eclipse'
 }
 
 repositories {
@@ -9,14 +8,9 @@ repositories {
 
 dependencies {
     api project(':services')
+
 }
 
 tasks.named('test') {
     useJUnitPlatform()
-}
-
-eclipse {
-    classpath {
-        baseSourceOutputDir = file('build/eclipse')
-    }
 }
