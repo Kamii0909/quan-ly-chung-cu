@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -20,12 +21,14 @@ public class TrangChuController implements Initializable {
     @FXML
     private AnchorPane application;
     @FXML
-    private Label loginLabel;
+    private Label sumFamily, sumVehicle;
+    @FXML
+    private Button login;
     @FXML
     private ComboBox<String> feeType;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loginLabel.setText("Login as");
+        login.setText("Login as");
     }
     private <T> void setAnchorConstraint(T pane) {
         Double v = 0.0;
@@ -46,9 +49,6 @@ public class TrangChuController implements Initializable {
                 break;
             case "Phi gui xe":
                 showPhiGuiXe();
-                break;
-            case "Phi dien, nuoc, internet":
-                showPhiDienNuoc();
                 break;
             case "Khoan tu nguyen":
                 showKhoanTuNguyen();
@@ -92,8 +92,6 @@ public class TrangChuController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void showPhiDienNuoc() {
-    }
     private void showKhoanTuNguyen() {
         application.getChildren().clear();
         try {
@@ -106,13 +104,14 @@ public class TrangChuController implements Initializable {
         }
     }
 
-    public void showThanhToan() {
+    @FXML
+    private void showHoKhau() {
         application.getChildren().clear();
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("ThanhToanView.fxml"));
-            Node ThanhToan = loader.load();
-            application.getChildren().add(ThanhToan);
-            setAnchorConstraint(ThanhToan);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("HoKhauView.fxml"));
+            Node HoKhau = loader.load();
+            application.getChildren().add(HoKhau);
+            setAnchorConstraint(HoKhau);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -129,16 +128,5 @@ public class TrangChuController implements Initializable {
 //        }
     }
 
-    @FXML
-    private void showHoKhau() {
-        application.getChildren().clear();
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("HoKhauView.fxml"));
-            Node HoKhau = loader.load();
-            application.getChildren().add(HoKhau);
-            setAnchorConstraint(HoKhau);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }
