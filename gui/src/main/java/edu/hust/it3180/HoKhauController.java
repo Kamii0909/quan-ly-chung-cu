@@ -17,9 +17,5 @@ public class HoKhauController {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
-
-//        observableApartmentList.clear();
-//        observableApartmentList.addAll(ApartmentUtil.getInstance().getModels());
-//        hoKhauTable.setItems(observableApartmentList);
     }
 }

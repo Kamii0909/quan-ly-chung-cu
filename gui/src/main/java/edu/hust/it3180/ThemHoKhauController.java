@@ -1,14 +1,24 @@
 package edu.hust.it3180;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ThemHoKhauController implements Initializable {
+    @FXML
+    private TextField tenChuHo, soNha, idChuHo;
+    @FXML
+    private TableView thanhVienTable;
+    @FXML
+    private TableColumn tenThanhVien, ngaySinhThanhVien, idThanhVien, quanHe;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
