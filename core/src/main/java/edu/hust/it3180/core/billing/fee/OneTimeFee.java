@@ -5,10 +5,6 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "one_time_fee")
-public class OneTimeFee extends AbstractFee {
-    
-    public OneTimeFee() {
-        // JPA
-    }
+public class OneTimeFee extends AbstractFeeMetadata {
     
 }

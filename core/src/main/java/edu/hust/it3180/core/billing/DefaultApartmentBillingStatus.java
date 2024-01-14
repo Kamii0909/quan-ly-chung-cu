@@ -5,57 +5,83 @@ import java.util.List;
 
 import com.google.common.collect.ImmutableList;
 
+import edu.hust.it3180.Apartment;
 import edu.hust.it3180.billing.ApartmentBillingStatus;
 import edu.hust.it3180.billing.Bill;
 import edu.hust.it3180.billing.Subscription;
-import edu.hust.it3180.billing.fee.Fee;
-import edu.hust.it3180.core.billing.fee.AppliedFeeDuration;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
+import edu.hust.it3180.billing.fee.FeeMetadata;
+import edu.hust.it3180.core.billing.fee.Fee;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "billing_status")
 public class DefaultApartmentBillingStatus implements ApartmentBillingStatus {
-
-    @OneToMany
-    @JoinColumn(name = "fee_id")
-    private List<AppliedFeeDuration> fees;
+    @Id
+    @GeneratedValue
+    private Long id;
+    @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
+    @JoinColumn(name = "apartment_id")
+    private Apartment apartment;
+    @ManyToMany
+    @JoinTable(
+        name = "billing_status_fees",
+        joinColumns = @JoinColumn(name = "fee_id"),
+        inverseJoinColumns = @JoinColumn(name = "status_id"))
+    private List<Fee> fees;
     @OneToMany
     @JoinColumn(name = "bill_id")
     private List<Bill> bills;
-
+    @OneToMany(mappedBy = "status")
+    private List<DefaultSubscription> subscriptions;
     
-
-    @Override
-    public ImmutableList<Fee> currentFees() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'currentFees'");
+    public void setApartment(Apartment apartment) {
+        this.apartment = apartment;
     }
-
+    
+    public void addBills(List<Bill> newBills) {
+        bills.addAll(newBills);
+    }
+    
+    public Apartment getApartment() {
+        return apartment;
+    }
+    
+    public List<Fee> fees() {
+        return fees;
+    }
+    
+    @Override
+    public ImmutableList<FeeMetadata> currentFees() {
+        return fees.stream()
+            .filter(fee -> fee.isCurrentlyApplied())
+            .map(fee -> fee.getMetadata())
+            .collect(ImmutableList.toImmutableList());
+    }
+    
     @Override
     public ImmutableList<Bill> bills() {
         return ImmutableList.copyOf(bills);
     }
-
+    
     @Override
     public ImmutableList<Bill> pendingBills() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'pendingBills'");
+        return bills().stream().filter(bill -> !bill.isSettled()).collect(ImmutableList.toImmutableList());
     }
-
+    
     @Override
     public ImmutableList<Subscription> subscriptions() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'subscriptions'");
+        return ImmutableList.copyOf(subscriptions);
     }
-
+    
     @Override
     public ImmutableList<Subscription> ongoingSubscription() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ongoingSubscription'");
+        return subscriptions.stream()
+            .filter(subs -> subs.isOngoing())
+            .collect(ImmutableList.toImmutableList());
     }
-
+    
     @Override
     public LocalDate calculatedDate() {
-        // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'calculatedDate'");
     }
     

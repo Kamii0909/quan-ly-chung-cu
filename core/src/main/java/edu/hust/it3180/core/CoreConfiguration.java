@@ -7,7 +7,7 @@ import edu.hust.it3180.core.apartment.DefaultApartment;
 import edu.hust.it3180.core.billing.DefaultApartmentBillingStatus;
 
 @EnableJpaRepositories(
-    basePackageClasses = { DefaultApartment.class, DefaultApartmentBillingStatus.class })
+    basePackageClasses = { DefaultApartment.class, DefaultApartmentBillingStatus.class, BillingSystemMetadata.class })
 @Configuration
 public class CoreConfiguration {
     
