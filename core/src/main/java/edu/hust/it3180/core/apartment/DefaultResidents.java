@@ -19,6 +19,9 @@ public class DefaultResidents implements Residents {
     
     private List<DefaultResident> residents;
     
+    public DefaultResidents() {
+    }
+    
     public DefaultResidents(List<Resident> residents) {
         this.residents = residents.stream()
             .map(DefaultResident::asDefaultImpl)
@@ -33,6 +36,14 @@ public class DefaultResidents implements Residents {
     @Override
     public int headCount() {
         return residents.size();
+    }
+    
+    public List<DefaultResident> getResidents() {
+        return residents;
+    }
+    
+    public void setResidents(List<DefaultResident> residents) {
+        this.residents = residents;
     }
     
 }

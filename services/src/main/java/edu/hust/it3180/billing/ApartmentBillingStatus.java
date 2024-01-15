@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 import com.google.common.collect.ImmutableList;
 
-import edu.hust.it3180.billing.fee.Fee;
+import edu.hust.it3180.billing.fee.FeeMetadata;
 
 public interface ApartmentBillingStatus {
     /**
@@ -12,7 +12,7 @@ public interface ApartmentBillingStatus {
      * the billing system would look through this list and generate corresponding
      * bills appropriate with time.
      */
-    ImmutableList<? extends Fee> currentFees();
+    ImmutableList<? extends FeeMetadata> currentFees();
     
     /**
      * All bills (including settled/fully paid) ones billed to this apartment. Note

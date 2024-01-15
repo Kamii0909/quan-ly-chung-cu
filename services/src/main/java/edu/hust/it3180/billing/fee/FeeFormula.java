@@ -23,6 +23,7 @@ public interface FeeFormula {
     /**
      * Last day before the charge is considered missed.
      */
+    @Deprecated
     Optional<LocalDate> deadline();
     
     MonetaryAmount fine(LocalDate paymentDate);

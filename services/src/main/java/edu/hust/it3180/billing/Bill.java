@@ -6,14 +6,14 @@ import java.util.Optional;
 
 import javax.money.MonetaryAmount;
 
-import edu.hust.it3180.billing.fee.Fee;
+import edu.hust.it3180.billing.fee.FeeMetadata;
 import edu.hust.it3180.billing.payment.Payment;
 
 /**
  * A bill generated from a fee at the billing period.
  */
 public interface Bill {
-    Fee fee();
+    FeeMetadata fee();
     
     MonetaryAmount amount();
     

@@ -21,7 +21,7 @@ public interface Subscription {
     BillingPeriod from();
 
     /**
-     * If this RecurringFee is currently applied. 
+     * If this RecurringFee is applied in this BillingPeriod.
      */
     boolean isOngoing();
     

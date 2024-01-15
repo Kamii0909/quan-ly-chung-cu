@@ -1,0 +1,11 @@
+spring: 
+    datasource:
+        hikari:
+            pool-name: Main Application Pool
+            username: cnpm
+            password: cnpm
+            schema: public
+            database-name: cnpm
+        url: jdbc:postgresql://localhost:5432/cnpm
+    jpa:
+        show-sql: true
