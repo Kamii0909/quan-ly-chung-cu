@@ -25,7 +25,7 @@
                     <Font name="System Bold" size="16.0" />
                 </font>
             </Label>
-            <Label fx:id="sumFamily" layoutX="154.0" layoutY="206.0" prefHeight="20.0" prefWidth="38.0">
+            <Label fx:id="sumFamily" layoutX="161.0" layoutY="206.0" prefHeight="20.0" prefWidth="38.0" text="50">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -35,7 +35,7 @@
                     <Font name="System Bold" size="16.0" />
                 </font>
             </Label>
-            <Label fx:id="sumVehicle" layoutX="154.0" layoutY="253.0" prefHeight="25.0" prefWidth="52.0">
+            <Label fx:id="sumVehicle" layoutX="161.0" layoutY="253.0" prefHeight="25.0" prefWidth="52.0" text="120">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -108,21 +108,6 @@
                                 -fx-font-weight: bold;
                             </style>
                         </ComboBox>
-<!--                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showThongKe" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Thống kê" textFill="BLACK">-->
-<!--                            <font>-->
-<!--                                <Font name="System Bold" size="18.0" />-->
-<!--                            </font>-->
-<!--                            <graphic>-->
-<!--                                <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" translateX="-5.0">-->
-<!--                                    <image>-->
-<!--                                        <Image url="@images/report.png" />-->
-<!--                                    </image>-->
-<!--                                </ImageView>-->
-<!--                            </graphic>-->
-<!--                            <VBox.margin>-->
-<!--                                <Insets />-->
-<!--                            </VBox.margin>-->
-<!--                        </Button>-->
                         <Button fx:id="login" alignment="CENTER" contentDisplay="CENTER" prefHeight="80.0" prefWidth="230.0" style="-fx-background-color: gray;" text="Đăng nhập" textFill="BLACK">
                             <VBox.margin>
                                 <Insets top="200" />
