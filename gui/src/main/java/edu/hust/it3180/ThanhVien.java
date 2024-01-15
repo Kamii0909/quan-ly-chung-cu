@@ -4,13 +4,15 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class ThanhVien {
-    private final StringProperty ten;
-    private final StringProperty ngaySinh;
-    private final StringProperty id;
-    private final StringProperty quanHe;
+    private StringProperty ten;
+    private StringProperty ngaySinh;
+    private String tenChuHo;
+    private StringProperty id;
+    private StringProperty quanHe;
 
-    public ThanhVien(String ten, String ngaySinh, String id, String quanHe) {
+    public ThanhVien(String ten, String tenChuHo, String ngaySinh, String id, String quanHe) {
         this.ten = new SimpleStringProperty(ten);
+        this.tenChuHo = tenChuHo;
         this.ngaySinh = new SimpleStringProperty(ngaySinh);
         this.id = new SimpleStringProperty(id);
         this.quanHe = new SimpleStringProperty(quanHe);
@@ -34,15 +36,12 @@ public class ThanhVien {
         return quanHe;
     }
 
-    // Các phương thức getter thông thường nếu cần
 
     public String getTen() {
         return ten.get();
     }
 
-    public String getNgaySinh() {
-        return ngaySinh.get();
-    }
+    public String getNgaySinh() { return ngaySinh.get(); }
 
     public String getId() {
         return id.get();

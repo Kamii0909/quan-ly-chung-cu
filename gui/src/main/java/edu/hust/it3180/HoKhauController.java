@@ -47,7 +47,7 @@ public class HoKhauController implements Initializable {
 //        hoKhauList = FXCollections.observableArrayList();
 //        Data.hoKhauList.add()
         // Thêm dữ liệu giả mạo
-        Data.hoKhauList.add(new HoKhau(1, "Nguyen Van A", "123456789", "0503", 80.5, 3));
+        Data.hoKhauList.add(new HoKhau(1, "Nguyen Van A", "123456789", "0503", 80.5, 2));
         Data.hoKhauList.add(new HoKhau(2, "Tran Thi B", "987654321", "0702", 65.2, 2));
         Data.hoKhauList.add(new HoKhau(3, "Le Van C", "456789012", "1009", 100.0, 4));
 
@@ -87,7 +87,6 @@ public class HoKhauController implements Initializable {
             Parent root = FXMLLoader.load(Objects.requireNonNull(InfoHoKhauController.class.getResource("InfoHoKhauView.fxml")));
             Scene scene = new Scene(root);
             stage.setScene(scene);
-            stage.setTitle("Thông tin hộ khẩu");
             stage.setResizable(false);
             stage.showAndWait();
         } catch (IOException e) {

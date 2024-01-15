@@ -46,8 +46,8 @@ public class HoKhau {
     public ObservableList<ThanhVien> getThanhVienList() {
         ObservableList<ThanhVien> thanhVienList = FXCollections.observableArrayList();
 
-        thanhVienList.add(new ThanhVien("Nguyen Van A", "01/01/1990", "123456789", "Con"));
-        thanhVienList.add(new ThanhVien("Tran Thi B", "05/05/1995", "987654321", "Cháu"));
+        thanhVienList.add(new ThanhVien("Nguyen Van A", "", "01/01/1990", "123456789", "Con"));
+        thanhVienList.add(new ThanhVien("Tran Thi B", "", "05/05/1995", "987654321", "Cháu"));
 
         return thanhVienList;
     }

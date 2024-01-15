@@ -6,6 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="652.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.hust.it3180.PhiQuanLyController">
     <children>
         <Label layoutX="47.0" layoutY="37.0" prefHeight="30.0" prefWidth="224.0" text="Phí quản lý chung cư">
@@ -23,12 +24,12 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="719.0" layoutY="89.0" text="Tổng:">
+        <Label layoutX="726.0" layoutY="89.0" text="Tổng:">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <Label fx:id="sumPaid" layoutX="758.0" layoutY="89.0" text="100/100">
+        <Label fx:id="sumPaid" layoutX="765.0" layoutY="89.0" text="3/4">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -38,7 +39,7 @@
                 <Font size="14.0" />
             </font>
         </Label>
-        <TableView fx:id="phiQuanLyTable" layoutX="47.0" layoutY="132.0" prefHeight="347.0">
+        <TableView fx:id="phiQuanLyTable" layoutX="47.0" layoutY="132.0" prefHeight="395.0" prefWidth="879.0">
             <columns>
                 <TableColumn fx:id="STT" prefWidth="42.0" text="STT" />
                 <TableColumn fx:id="tenChuHo" prefWidth="160.0" text="Chủ hộ" />
@@ -52,5 +53,11 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+        <Button fx:id="payButton" layoutX="942.0" layoutY="236.0" mnemonicParsing="false" onAction="#pay" text="Thanh toan" />
+        <Label layoutX="739.0" layoutY="574.0" text="Tổng:">
+            <font>
+                <Font name="System Bold" size="14.0" />
+            </font>
+        </Label>
     </children>
 </AnchorPane>

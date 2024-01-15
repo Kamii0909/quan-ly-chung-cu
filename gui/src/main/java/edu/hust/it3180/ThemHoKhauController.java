@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -16,32 +17,32 @@ public class ThemHoKhauController implements Initializable {
     @FXML
     private TextField tenChuHo, soNha, idChuHo;
     @FXML
-    private TableView thanhVienTable;
+    private TableView<ThanhVien> thanhVienTable;
     @FXML
-    private TableColumn tenThanhVien, ngaySinhThanhVien, idThanhVien, quanHe;
+    private TableColumn<ThanhVien, String> tenThanhVien, ngaySinhThanhVien, idThanhVien, quanHe;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-
+        tenThanhVien.setCellValueFactory(new PropertyValueFactory<>("tenThanhVien"));
+        ngaySinhThanhVien.setCellValueFactory(new PropertyValueFactory<>("ngaySinhThanhVien"));
+        idThanhVien.setCellValueFactory(new PropertyValueFactory<>("idThanhVien"));
+        quanHe.setCellValueFactory(new PropertyValueFactory<>("quanHe"));
     }
 
     public void save(ActionEvent event) {
-        Data.hoKhauList.add(new HoKhau(4, "Nguyen Van A", "123456789", "0503", 80.5, 3));
-        //        HoKhauModel model = new HoKhauModel();
-//        NhanKhauModel tempModel = PersonUtil.getInstance().getMonitor();
+//        Data.hoKhauList.add(new HoKhau(4, "Nguyen Van A", "123456789", "0503", 80.5, 3));
+        String tenChuHoValue = tenChuHo.getText();
+        String soNhaValue = soNha.getText();
+        String idChuHoValue = idChuHo.getText();
 
-//        model.setId(id.getText());
-//        model.setSoNha(Integer.valueOf(soNha.getText()));
-//        model.setTenChuHo(tempModel.getHoTen());
-//
-//        ApartmentUtil.getInstance().add(model);
-//        apartmentService.save(model);
-//
-//        List<NhanKhauModel> list = new ArrayList<>(thanhVienTable.getItems());
-//        for(NhanKhauModel nhanKhauModel : list) {
-//            nhanKhauModel.setIdHoKhau(model.getId());
-//            nhanKhauService.update(nhanKhauModel);
-//        }
+        String tenThanhVienValue = tenThanhVien.getCellData(thanhVienTable.getSelectionModel().getSelectedItem());;
+        String ngaySinhValue = ngaySinhThanhVien.getCellData(thanhVienTable.getSelectionModel().getSelectedItem());;
+        String idThanhVienValue = idThanhVien.getCellData(thanhVienTable.getSelectionModel().getSelectedItem());;
+        String quanHeValue = quanHe.getCellData(thanhVienTable.getSelectionModel().getSelectedItem());;
+
+        Data.hoKhauList.add(new HoKhau(4, tenChuHoValue, idChuHoValue, soNhaValue, 70.0, 0));
+        Data.memberList.add(new ThanhVien(tenThanhVienValue, tenChuHoValue, ngaySinhValue, idThanhVienValue, quanHeValue));
+
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
     }
