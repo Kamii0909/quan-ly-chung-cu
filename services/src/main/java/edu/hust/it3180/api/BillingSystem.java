@@ -11,7 +11,7 @@ import edu.hust.it3180.Apartment;
 import edu.hust.it3180.billing.ApartmentBillingStatus;
 import edu.hust.it3180.billing.Bill;
 import edu.hust.it3180.billing.BillingPeriod;
-import edu.hust.it3180.billing.fee.Fee;
+import edu.hust.it3180.billing.fee.FeeMetadata;
 import edu.hust.it3180.billing.payment.Payment;
 
 /**
@@ -105,12 +105,14 @@ public interface BillingSystem {
      * Apply a new Fee on multiple apartments. New bills are not guaranteed to be
      * issued immediately after this method returns, but it is up to implementation.
      */
-    void applyFee(Fee fee, Predicate<Apartment> whichApartment);
+    void applyFee(FeeMetadata fee, Predicate<Apartment> whichApartment);
     
     /**
      * Returns all Fee currently applied to a specific BillingPeriod.
      */
-    ImmutableList<Fee> ongoingFee(BillingPeriod billingPeriod);
+
+    ImmutableList<FeeMetadata> ongoingFee(BillingPeriod billingPeriod);
+
     
     /**
      * Remove fee(s) from the list of currently ongoing fees, starting from
@@ -120,5 +122,7 @@ public interface BillingSystem {
      * we deal with it? For now, just fail the call, the manager will deal with it
      * manually irl.
      */
-    void removeFee(Predicate<Fee> whichFee, BillingPeriod from);
+
+    void removeFee(Predicate<FeeMetadata> whichFee, BillingPeriod from);
+
 }

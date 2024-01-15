@@ -9,13 +9,15 @@ import jakarta.persistence.*;
 @Table(name = "apartments")
 public class DefaultApartment implements Apartment {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Embedded
     private DefaultApartmentPosition position;
-    @OneToOne(orphanRemoval = true)
-    @JoinColumn(name = "contract_id")
     private DefaultContractStatus status;
+    
+    public DefaultApartment() {
+        // JPA
+    }
     
     public static DefaultApartment asDefaultImpl(Apartment apartment) {
         if (apartment instanceof DefaultApartment da) {
@@ -37,6 +39,30 @@ public class DefaultApartment implements Apartment {
     @Override
     public ApartmentPosition position() {
         return position;
+    }
+    
+    public Long getId() {
+        return id;
+    }
+    
+    public void setId(Long id) {
+        this.id = id;
+    }
+    
+    public DefaultApartmentPosition getPosition() {
+        return position;
+    }
+    
+    public void setPosition(DefaultApartmentPosition position) {
+        this.position = position;
+    }
+    
+    public DefaultContractStatus getStatus() {
+        return status;
+    }
+    
+    public void setStatus(DefaultContractStatus status) {
+        this.status = status;
     }
     
 }

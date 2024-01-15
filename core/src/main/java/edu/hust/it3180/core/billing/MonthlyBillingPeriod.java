@@ -1,7 +1,10 @@
-package edu.hust.it3180.core.billing.fee;
+package edu.hust.it3180.core.billing;
 
 import java.time.LocalDate;
+import java.time.Period;
 import java.time.YearMonth;
+
+import com.google.common.collect.AbstractIterator;
 
 import edu.hust.it3180.billing.BillingPeriod;
 import jakarta.persistence.Access;
@@ -12,6 +15,8 @@ import jakarta.persistence.Transient;
 @Embeddable
 @Access(value = AccessType.FIELD)
 public class MonthlyBillingPeriod implements BillingPeriod {
+    public static final MonthlyBillingPeriod FAR_FUTURE = new MonthlyBillingPeriod(1, 3000);
+    public static MonthlyBillingPeriod CURRENT = new MonthlyBillingPeriod(YearMonth.now());
     private int month;
     private int year;
     @Transient
@@ -20,7 +25,18 @@ public class MonthlyBillingPeriod implements BillingPeriod {
     private LocalDate to;
     
     public static BillingPeriod current() {
-        return new MonthlyBillingPeriod(YearMonth.now());
+        return CURRENT;
+    }
+    
+    /**
+     * Returns the BillingPeriod that {@code date} is in.
+     */
+    public static MonthlyBillingPeriod forLocalDate(LocalDate date) {
+        return new MonthlyBillingPeriod(YearMonth.from(date));
+    }
+    
+    public MonthlyBillingPeriod() {
+        // JPA
     }
     
     private MonthlyBillingPeriod(YearMonth ym) {
@@ -30,18 +46,37 @@ public class MonthlyBillingPeriod implements BillingPeriod {
         this.year = ym.getYear();
     }
     
-    private MonthlyBillingPeriod(int month, int year) {
+    public MonthlyBillingPeriod(int month, int year) {
         this(YearMonth.of(year, month));
+    }
+    
+    public MonthlyBillingPeriod next() {
+        return new MonthlyBillingPeriod(YearMonth.of(year, month).plus(Period.ofMonths(1)));
+    }
+    
+    public Iterable<MonthlyBillingPeriod> nextUntil(MonthlyBillingPeriod finalPeriod) {
+        MonthlyBillingPeriod start = this;
+        return () -> new AbstractIterator<MonthlyBillingPeriod>() {
+            private MonthlyBillingPeriod last = start;
+            
+            @Override
+            protected MonthlyBillingPeriod computeNext() {
+                if (last.compareTo(finalPeriod) > 0) {
+                    return endOfData();
+                }
+                return (last = last.next());
+            }
+        };
     }
     
     @Override
     public LocalDate from() {
-        return from;
+        return from == null ? (from = LocalDate.of(year, month, 1)) : from;
     }
     
     @Override
     public LocalDate to() {
-        return to;
+        return to == null ? (to = YearMonth.of(year, month).atEndOfMonth()) : to;
     }
     
     @Override
@@ -79,6 +114,23 @@ public class MonthlyBillingPeriod implements BillingPeriod {
         } else if (!to.equals(other.to))
             return false;
         return true;
+    }
+    
+    @Override
+    public int compareTo(BillingPeriod o) {
+        if (o instanceof MonthlyBillingPeriod mbp) {
+            var yCmp = Integer.compare(this.year, mbp.year);
+            return yCmp != 0 ? yCmp : Integer.compare(this.month, mbp.month);
+        }
+        throw new UnsupportedOperationException("o is not MonthlyBillingPeriod");
+    }
+    
+    public int month() {
+        return month;
+    }
+    
+    public int year() {
+        return year;
     }
     
 }

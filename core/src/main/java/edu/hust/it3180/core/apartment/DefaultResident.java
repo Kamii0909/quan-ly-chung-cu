@@ -20,6 +20,9 @@ public class DefaultResident implements Resident {
     private String email;
     private String cicLink;
     
+    public DefaultResident() {
+    }
+    
     public DefaultResident(String name, Optional<String> phone, Optional<String> email, Optional<URI> cicLink) {
         this.name = name;
         this.phone = phone.orElse(null);
@@ -51,6 +54,38 @@ public class DefaultResident implements Resident {
         } catch (URISyntaxException e) {
             return Optional.empty();
         }
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCicLink() {
+        return cicLink;
+    }
+
+    public void setCicLink(String cicLink) {
+        this.cicLink = cicLink;
     }
     
 }
