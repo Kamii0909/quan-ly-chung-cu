@@ -18,37 +18,38 @@ public class InfoHoKhauController implements Initializable {
     @FXML
     private TableView<ThanhVien> thanhVienTable;
     @FXML
-    private TableColumn<ThanhVien, String> tenThanhVienColumn;
+    private TableColumn<ThanhVien, String> tenThanhVien;
 
     @FXML
-    private TableColumn<ThanhVien, String> ngaySinhColumn;
+    private TableColumn<ThanhVien, String> ngaySinhThanhVien;
 
     @FXML
-    private TableColumn<ThanhVien, String> idThanhVienColumn;
+    private TableColumn<ThanhVien, String> idThanhVien;
 
     @FXML
-    private TableColumn<ThanhVien, String> quanHeColumn;
+    private TableColumn<ThanhVien, String> quanHe;
 
     private HoKhau hoKhau;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        tenThanhVienColumn.setCellValueFactory(cellData -> cellData.getValue().tenProperty());
-        ngaySinhColumn.setCellValueFactory(cellData -> cellData.getValue().ngaySinhProperty());
-        idThanhVienColumn.setCellValueFactory(cellData -> cellData.getValue().idProperty());
-        quanHeColumn.setCellValueFactory(cellData -> cellData.getValue().quanHeProperty());
+        Data.hoKhauInfo;
+//        tenThanhVien.setCellValueFactory(cellData -> cellData.getValue().tenProperty());
+//        ngaySinhThanhVien.setCellValueFactory(cellData -> cellData.getValue().ngaySinhProperty());
+//        idThanhVien.setCellValueFactory(cellData -> cellData.getValue().idProperty());
+//        quanHe.setCellValueFactory(cellData -> cellData.getValue().quanHeProperty());
     }
 
-    public void setData(HoKhau hoKhau) {
+    public void setData(HoKhau selectedhoKhau) {
         this.hoKhau = hoKhau;
         showHoKhauInfo();
     }
 
-    // Hiển thị thông tin hộ khẩu lên giao diện
     private void showHoKhauInfo() {
-        tenChuHo.setText(hoKhau.getTenChuHo());
-        soNha.setText(hoKhau.getSoNha());
-
-        // Hiển thị thông tin thành viên lên TableView
-        thanhVienTable.setItems(hoKhau.getThanhVienList());
+        if (hoKhau != null) {
+            tenChuHo.setText(hoKhau.getTenChuHo());
+            soNha.setText(hoKhau.getSoNha());
+            idChuHo.setText(String.valueOf(hoKhau.getIdChuHo()));
+            // ... (hiển thị các thông tin khác tương tự)
+        }
     }
 }

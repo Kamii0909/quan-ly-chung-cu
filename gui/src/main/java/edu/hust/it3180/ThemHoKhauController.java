@@ -26,7 +26,8 @@ public class ThemHoKhauController implements Initializable {
     }
 
     public void save(ActionEvent event) {
-//        HoKhauModel model = new HoKhauModel();
+        Data.hoKhauList.add(new HoKhau(4, "Nguyen Van A", "123456789", "0503", 80.5, 3));
+        //        HoKhauModel model = new HoKhauModel();
 //        NhanKhauModel tempModel = PersonUtil.getInstance().getMonitor();
 
 //        model.setId(id.getText());
