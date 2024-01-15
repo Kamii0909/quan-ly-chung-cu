@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="652.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.hust.it3180.KhoanTuNguyenController">
+    <children>
+        <Label layoutX="47.0" layoutY="37.0" prefHeight="27.0" prefWidth="197.0" text="Khoản tự nguyện">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="47.0" layoutY="61.0" prefHeight="61.0" prefWidth="910.0" text="Các khoản đóng góp mà ban quản trị phối hợp với chính quyền địa phương, tổ dân phố để thực hiện thu (ví dụ quỹ vì người nghèo, quỹ biển đảo, quỹ từ thiện,...). Các khoản đóng góp này thu theo từng đợt, không bắt buộc và thu theo tinh thần tự nguyện." textAlignment="JUSTIFY" wrapText="true" />
+        <TableView fx:id="thuPhiTable" layoutX="47.0" layoutY="132.0" prefHeight="347.0" prefWidth="960.0">
+            <columns>
+                <TableColumn fx:id="STT" prefWidth="36.0" text="STT" />
+                <TableColumn fx:id="tenChuHo" prefWidth="133.0" text="Tên chủ hộ" />
+                <TableColumn fx:id="soNha" text="Số nhà" />
+                <TableColumn prefWidth="70.0" text="Quỹ vì &#10;người &#10;nghèo" />
+                <TableColumn prefWidth="70.0" text="Quỹ vì&#10;biển &#10;đảo VN" />
+                <TableColumn prefWidth="70.0" text="Quỹ lễ&#10;Đình&#10;Gừng" />
+                <TableColumn prefWidth="70.0" text="Quỹ tổ&#10;DP" />
+                <TableColumn prefWidth="70.0" text="Quỹ vì&#10;trẻ thơ" />
+                <TableColumn prefWidth="70.0" text="Quỹ&#10;nhân&#10;đạo, từ&#10;thiện" />
+                <TableColumn prefWidth="70.0" text="Quỹ&#10;tình&#10;nghĩa" />
+                <TableColumn prefWidth="70.0" text="Quỹ&#10;khuyến&#10;học" />
+                <TableColumn prefWidth="70.0" text="Quỹ&#10;người&#10;cao tuổi" />
+                <TableColumn fx:id="trangThai" prefWidth="70.0" text="Xác nhận" />
+            </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+        </TableView>
+    </children>
+</AnchorPane>

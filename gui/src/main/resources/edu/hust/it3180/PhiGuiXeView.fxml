@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="652.0" prefWidth="1070.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.hust.it3180.PhiGuiXeController">
+    <children>
+        <Label layoutX="47.0" layoutY="37.0" prefHeight="27.0" prefWidth="197.0" text="Phí gửi xe">
+            <font>
+                <Font name="System Bold" size="18.0" />
+            </font>
+        </Label>
+        <Label layoutX="47.0" layoutY="68.0" prefHeight="59.0" prefWidth="746.0" text="Loại phí thu từng tháng theo thông tin phương tiện đăng ký của hộ gia đình, trong đó phí gửi xe máy hàng tháng là 70.000/xe/một tháng và phígửi ô tô là 1.200.000 đồng/xe/một tháng."
+               textAlignment="JUSTIFY" wrapText="true" />
+        <TableView fx:id="thuPhiTable" layoutX="47.0" layoutY="132.0" prefHeight="347.0" prefWidth="746.0">
+            <columns>
+                <TableColumn fx:id="STT" prefWidth="36.0" text="STT" />
+                <TableColumn fx:id="tenChuHo" prefWidth="171.0" text="Chủ hộ" />
+                <TableColumn fx:id="soNha" prefWidth="118.0" text="Số nhà" />
+                <TableColumn fx:id="xeMay" prefWidth="100.0" text="Số xe máy" />
+                <TableColumn fx:id="oTo" prefWidth="100.0" text="Số ô tô" />
+                <TableColumn fx:id="tongPhi" prefWidth="116.0" text="Tổng phí" />
+                <TableColumn fx:id="trangThai" prefWidth="111.0" text="Trạng thái" />
+            </columns>
+        </TableView>
+    </children>
+</AnchorPane>
