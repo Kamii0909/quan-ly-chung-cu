@@ -3,6 +3,7 @@ package edu.hust.it3180;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -27,6 +28,9 @@ public class LoginController {
         // So sánh dữ liệu nhập với thông tin Admin cố định
         if (enteredUsername.equals(admin.getUsername()) && enteredPassword.equals(admin.getPassword())) {
             openTrangChuView(new Stage());
+            Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+            // Đóng cửa sổ
+            stage.close();
         } else {
             // Nếu sai, hiển thị thông báo lỗi
             Alert alert = new Alert(Alert.AlertType.ERROR);

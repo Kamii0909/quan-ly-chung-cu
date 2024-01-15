@@ -18,9 +18,7 @@ public class Data {
     public static ObservableList<ThanhVien> memberList = FXCollections.observableArrayList();
 
     public static ObservableList<DichVuFee> dichVuList = FXCollections.observableArrayList();
-    static {
-        dichVuList.add(new DichVuFee(1, "Nguyen Van A", "0503", 80.5F, 805000,LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
-    }
-
-
+    public static ObservableList<DichVuFee> quanLyList = FXCollections.observableArrayList();
+    public static ObservableList<TuNguyenFee> tuNguyenList = FXCollections.observableArrayList();
+    public static ObservableList<GuiXeFee> guiXeList = FXCollections.observableArrayList();
 }

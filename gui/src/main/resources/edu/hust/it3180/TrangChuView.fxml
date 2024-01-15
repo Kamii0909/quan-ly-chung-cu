@@ -25,7 +25,7 @@
                     <Font name="System Bold" size="16.0" />
                 </font>
             </Label>
-            <Label fx:id="sumFamily" layoutX="161.0" layoutY="206.0" prefHeight="20.0" prefWidth="38.0" text="50">
+            <Label fx:id="sumFamily" layoutX="161.0" layoutY="206.0" prefHeight="20.0" prefWidth="38.0" text="3">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -35,7 +35,7 @@
                     <Font name="System Bold" size="16.0" />
                 </font>
             </Label>
-            <Label fx:id="sumVehicle" layoutX="161.0" layoutY="253.0" prefHeight="25.0" prefWidth="52.0" text="120">
+            <Label fx:id="sumVehicle" layoutX="161.0" layoutY="253.0" prefHeight="25.0" prefWidth="52.0" text="4">
                 <font>
                     <Font name="System Bold" size="16.0" />
                 </font>
@@ -53,17 +53,17 @@
                         <Font name="System Bold" size="18.0" />
                     </font>
                 </Label>
-                <Label alignment="CENTER" layoutX="474.0" layoutY="27.0" prefWidth="150.0" text="Exit" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="0.0">
-                    <font>
-                        <Font size="18.0" />
-                    </font>
-                </Label>
+            <Button layoutX="1155.0" layoutY="18.0" onAction="#exit" mnemonicParsing="false" prefHeight="34.0" prefWidth="64.0" text="Thoát">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Button>
             </children></AnchorPane>
         <AnchorPane layoutX="14.0" layoutY="176.0" prefHeight="200.0" prefWidth="230.0" style="-fx-background-color: #0a4969;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="70.0">
             <children>
                 <VBox layoutX="27.0" layoutY="51.0" prefHeight="0.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                     <children>
-                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Trang chủ" textFill="BLACK">
+                        <Button alignment="BASELINE_LEFT" mnemonicParsing="false" onAction="#showTrangChu" prefHeight="80.0" prefWidth="230.0" styleClass="sidebarItem" text="Trang chủ" textFill="BLACK">
                             <font>
                                 <Font name="System Bold" size="18.0" />
                             </font>

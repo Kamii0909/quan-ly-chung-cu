@@ -1,16 +1,18 @@
 package edu.hust.it3180;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
-import java.awt.event.ActionEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -28,7 +30,7 @@ public class TrangChuController implements Initializable {
     private ComboBox<String> feeType;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        login.setText("Login as");
+        login.setText("Admin");
     }
     private <T> void setAnchorConstraint(T pane) {
         Double v = 0.0;
@@ -129,4 +131,29 @@ public class TrangChuController implements Initializable {
     }
 
 
+    public void showTrangChu(ActionEvent actionEvent) {
+        application.getChildren().clear();
+        try{
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("TrangChu2View.fxml"));
+            Node trangChu = loader.load();
+            application.getChildren().add(trangChu);
+            setAnchorConstraint(trangChu);
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void exit(ActionEvent actionEvent) throws IOException {
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+        // Đóng cửa sổ
+        stage.close();
+
+        Parent root = FXMLLoader.load(getClass().getResource("Login.fxml"));
+        Scene scene = new Scene(root);
+        scene.getStylesheets().add(getClass().getResource("styles.css").toExternalForm());
+
+        stage.setTitle("JavaFX and Gradle");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

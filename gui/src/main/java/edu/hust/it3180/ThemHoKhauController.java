@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -30,10 +31,14 @@ public class ThemHoKhauController implements Initializable {
     }
 
     public void save(ActionEvent event) {
-//        Data.hoKhauList.add(new HoKhau(4, "Nguyen Van A", "123456789", "0503", 80.5, 3));
+
         String tenChuHoValue = tenChuHo.getText();
         String soNhaValue = soNha.getText();
         String idChuHoValue = idChuHo.getText();
+        if (tenChuHoValue.isEmpty() || soNhaValue.isEmpty() || idChuHoValue.isEmpty()) {
+            showAlert("Error", "Vui long dien day du thong tin!", Alert.AlertType.ERROR);
+            return;
+        }
 
         String tenThanhVienValue = tenThanhVien.getCellData(thanhVienTable.getSelectionModel().getSelectedItem());;
         String ngaySinhValue = ngaySinhThanhVien.getCellData(thanhVienTable.getSelectionModel().getSelectedItem());;
@@ -50,5 +55,12 @@ public class ThemHoKhauController implements Initializable {
     public void exit(ActionEvent event) {
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         stage.close();
+    }
+    private void showAlert(String title, String content, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 }

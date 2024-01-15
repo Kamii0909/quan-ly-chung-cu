@@ -29,14 +29,16 @@ public class PhiDichVuController implements Initializable {
     @FXML
     private Button payButton;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        updateCurrentTime();
+    static {
         Data.dichVuList.clear();
         Data.dichVuList.add(new DichVuFee(1, "Nguyen Van A", "0503", 80.5F, 805000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
         Data.dichVuList.add(new DichVuFee(2, "Tran Thi B", "0702", 65.2F, 625000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
         Data.dichVuList.add(new DichVuFee(3, "Le Van C", "1009", 100.0F, 1000000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
         Data.dichVuList.add(new DichVuFee(4, "Phung Van D", "0111", 70.0F, 700000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), false));
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        updateCurrentTime();
         STT.setCellValueFactory(new PropertyValueFactory<>("stt"));
         tenChuHo.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
         soNha.setCellValueFactory(new PropertyValueFactory<>("soNha"));

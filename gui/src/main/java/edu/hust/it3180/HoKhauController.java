@@ -42,15 +42,14 @@ public class HoKhauController implements Initializable {
     @FXML
     private TableColumn<HoKhau, Void> chiTiet;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-//        hoKhauList = FXCollections.observableArrayList();
-//        Data.hoKhauList.add()
-        // Thêm dữ liệu giả mạo
+    static {
+        Data.hoKhauList.clear();
         Data.hoKhauList.add(new HoKhau(1, "Nguyen Van A", "123456789", "0503", 80.5, 2));
         Data.hoKhauList.add(new HoKhau(2, "Tran Thi B", "987654321", "0702", 65.2, 2));
         Data.hoKhauList.add(new HoKhau(3, "Le Van C", "456789012", "1009", 100.0, 4));
-
+    }
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
         // Liên kết cột với thuộc tính của HoKhau
         STT.setCellValueFactory(new PropertyValueFactory<>("stt"));
         tenChuHo.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
@@ -101,9 +100,6 @@ public class HoKhauController implements Initializable {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.showAndWait();
-//        Data.hoKhauList.add(new HoKhau(4, "Nguyen Van A", "123456789", "0503", 80.5, 3));
-//        Data.hoKhauList.add(new HoKhau(5, "Tran Thi B", "987654321", "0702", 65.2, 2));
-//        Data.hoKhauList.add(new HoKhau(6, "Le Van C", "456789012", "1009", 100.0, 4));
 
     }
 }

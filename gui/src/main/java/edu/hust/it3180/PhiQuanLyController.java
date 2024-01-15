@@ -19,22 +19,26 @@ import java.util.ResourceBundle;
 
 public class PhiQuanLyController implements Initializable {
     @FXML
-    private Label currentTime, sumPaid;
+    private Label currentTime, sumPaid, sumMoney;
     @FXML
     private TableView phiQuanLyTable;
     @FXML
     private TableColumn STT, tenChuHo, soNha, dienTich, tongPhi, ngay, trangThai;
     @FXML
     private Button payButton;
+
+
+    static {
+        Data.quanLyList.clear();
+        Data.quanLyList.add(new DichVuFee(1, "Nguyen Van A", "0503", 80.5F, 563500, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
+        Data.quanLyList.add(new DichVuFee(2, "Tran Thi B", "0702", 65.2F, 456400, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
+        Data.quanLyList.add(new DichVuFee(3, "Le Van C", "1009", 100.0F, 700000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
+        Data.quanLyList.add(new DichVuFee(4, "Phung Van D", "0111", 70.0F, 490000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), false));
+    }
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         updateCurrentTime();
-        updateCurrentTime();
-        Data.dichVuList.clear();
-        Data.dichVuList.add(new DichVuFee(1, "Nguyen Van A", "0503", 80.5F, 563500, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
-        Data.dichVuList.add(new DichVuFee(2, "Tran Thi B", "0702", 65.2F, 456400, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
-        Data.dichVuList.add(new DichVuFee(3, "Le Van C", "1009", 100.0F, 700000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
-        Data.dichVuList.add(new DichVuFee(4, "Phung Van D", "0111", 70.0F, 490000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), false));
         STT.setCellValueFactory(new PropertyValueFactory<>("stt"));
         tenChuHo.setCellValueFactory(new PropertyValueFactory<>("tenChuHo"));
         soNha.setCellValueFactory(new PropertyValueFactory<>("soNha"));
@@ -43,19 +47,22 @@ public class PhiQuanLyController implements Initializable {
         ngay.setCellValueFactory(new PropertyValueFactory<>("ngay"));
         trangThai.setCellValueFactory(new PropertyValueFactory<>("trangThai"));
 
-        phiQuanLyTable.setItems(Data.dichVuList);
+        phiQuanLyTable.setItems(Data.quanLyList);
     }
     private void updateCurrentTime() {
-        // Get real time
         LocalDateTime now = LocalDateTime.now();
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/yyyy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedThoiGian = now.format(formatter);
 
-        // Update time for label
         currentTime.setText(formattedThoiGian);
     }
 
     public void pay(ActionEvent actionEvent) {
+        Data.quanLyList.remove(3);
+        Data.quanLyList.add(new DichVuFee(4, "Phung Van D", "0111", 70.0F, 700000, LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")), true));
+        payButton.setVisible(false);
+        sumPaid.setText("4/4");
+        sumMoney.setText("2209900");
     }
 }

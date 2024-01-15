@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,7 +14,7 @@
                 <Font name="System Bold" size="20.0" />
             </font>
         </Label>
-        <Label layoutX="47.0" layoutY="89.0" text="Tháng:">
+        <Label layoutX="47.0" layoutY="89.0" text="Ngày:">
             <font>
                 <Font name="System Bold" size="14.0" />
             </font>
@@ -23,29 +24,18 @@
                 <Font name="System Bold" size="14.0" />
             </font>
         </Label>
-        <Label layoutX="719.0" layoutY="89.0" text="Tổng:">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
-        <Label fx:id="sumPaid" layoutX="758.0" layoutY="89.0" text="100/100">
-            <font>
-                <Font name="System Bold" size="14.0" />
-            </font>
-        </Label>
-        <Label layoutX="819.0" layoutY="89.0" text="hộ đã thanh toán">
-            <font>
-                <Font size="14.0" />
-            </font>
-        </Label>
+        <Button layoutX="879.0" layoutY="87.0" mnemonicParsing="false" onAction="#newGuiXeFee" text="Thêm mới">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
         <TableView fx:id="phiGuiXeTable" layoutX="47.0" layoutY="132.0" prefHeight="347.0">
             <columns>
                 <TableColumn fx:id="STT" prefWidth="43.0" text="STT" />
                 <TableColumn fx:id="tenChuHo" prefWidth="174.0" text="Chủ hộ" />
                 <TableColumn fx:id="soNha" prefWidth="118.0" text="Số nhà" />
-                <TableColumn fx:id="xeMay" prefWidth="100.0" text="Số xe máy" />
-                <TableColumn fx:id="oTo" prefWidth="100.0" text="Số ô tô" />
-                <TableColumn fx:id="tongPhi" prefWidth="130.0" text="Tổng số tiền (đồng)" />
+                <TableColumn fx:id="soXeMay" prefWidth="100.0" text="Số xe máy" />
+                <TableColumn fx:id="soOTo" prefWidth="100.0" text="Số ô tô" />
+                <TableColumn fx:id="tien" prefWidth="130.0" text="Tổng số tiền (đồng)" />
                 <TableColumn fx:id="ngay" prefWidth="118.0" text="Ngày" />
                 <TableColumn fx:id="trangThai" prefWidth="121.0" text="Trạng thái" />
             </columns>
@@ -53,5 +43,6 @@
                 <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
             </columnResizePolicy>
         </TableView>
+
     </children>
 </AnchorPane>
