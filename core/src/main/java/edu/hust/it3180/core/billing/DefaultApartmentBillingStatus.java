@@ -10,6 +10,7 @@ import edu.hust.it3180.billing.ApartmentBillingStatus;
 import edu.hust.it3180.billing.Bill;
 import edu.hust.it3180.billing.Subscription;
 import edu.hust.it3180.billing.fee.FeeMetadata;
+import edu.hust.it3180.core.apartment.DefaultApartment;
 import edu.hust.it3180.core.billing.fee.Fee;
 import jakarta.persistence.*;
 
@@ -17,28 +18,25 @@ import jakarta.persistence.*;
 @Table(name = "billing_status")
 public class DefaultApartmentBillingStatus implements ApartmentBillingStatus {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @OneToOne(fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "apartment_id")
-    private Apartment apartment;
+    private DefaultApartment apartment;
     @ManyToMany
     @JoinTable(
         name = "billing_status_fees",
         joinColumns = @JoinColumn(name = "fee_id"),
         inverseJoinColumns = @JoinColumn(name = "status_id"))
     private List<Fee> fees;
-    @OneToMany
-    @JoinColumn(name = "bill_id")
-    private List<Bill> bills;
     @OneToMany(mappedBy = "status")
-    private List<DefaultSubscription> subscriptions;
+    private List<DefaultBill> bills;
     
-    public void setApartment(Apartment apartment) {
+    public void setApartment(DefaultApartment apartment) {
         this.apartment = apartment;
     }
     
-    public void addBills(List<Bill> newBills) {
+    public void addBills(List<DefaultBill> newBills) {
         bills.addAll(newBills);
     }
     
@@ -70,12 +68,12 @@ public class DefaultApartmentBillingStatus implements ApartmentBillingStatus {
     
     @Override
     public ImmutableList<Subscription> subscriptions() {
-        return ImmutableList.copyOf(subscriptions);
+        throw new UnsupportedOperationException("Unimplemented");
     }
     
     @Override
     public ImmutableList<Subscription> ongoingSubscription() {
-        return subscriptions.stream()
+        return subscriptions().stream()
             .filter(subs -> subs.isOngoing())
             .collect(ImmutableList.toImmutableList());
     }

@@ -17,7 +17,7 @@ import jakarta.persistence.*;
 @Table(name = "subscriptions")
 public class DefaultSubscription implements Subscription {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
     @JoinColumn(name = "fee_id")
@@ -32,7 +32,7 @@ public class DefaultSubscription implements Subscription {
     @AttributeOverride(name = "year", column = @Column(name = "to_year"))
     private MonthlyBillingPeriod to;
     @OneToMany
-    private List<Bill> bills;
+    private List<DefaultBill> bills;
     
     @Override
     public RecurringFee fee() {

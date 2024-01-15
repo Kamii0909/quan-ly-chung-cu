@@ -7,20 +7,23 @@ import java.util.Optional;
 import javax.money.MonetaryAmount;
 
 import org.hibernate.annotations.CompositeType;
-
-import com.fasterxml.jackson.annotation.JsonSubTypes.Type;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import edu.hust.it3180.billing.Bill;
 import edu.hust.it3180.billing.BillingPeriod;
 import edu.hust.it3180.billing.fee.FeeMetadata;
 import edu.hust.it3180.billing.payment.Payment;
 import edu.hust.it3180.core.billing.fee.Fee;
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import io.hypersistence.utils.hibernate.type.money.MonetaryAmountType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "bills")
 public class DefaultBill implements Bill {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     @ManyToOne
     @JoinColumn(name = "fee_id")
     private Fee fee;
@@ -29,8 +32,11 @@ public class DefaultBill implements Bill {
     private MonthlyBillingPeriod period;
     private boolean isSettled;
     private LocalDateTime settledDateTime;
-    @Type(value = JsonType.class)
+    @JdbcTypeCode(SqlTypes.JSON)
     private List<Payment> payments;
+    @ManyToOne
+    @JoinColumn(name = "status_id")
+    private DefaultApartmentBillingStatus status;
     
     public DefaultBill(Fee fee, MonetaryAmount amount, MonthlyBillingPeriod period) {
         this.fee = fee;

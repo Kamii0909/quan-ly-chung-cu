@@ -1,22 +1,23 @@
 package edu.hust.it3180.core.billing.fee;
 
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import edu.hust.it3180.billing.fee.FeeFormula;
 import edu.hust.it3180.billing.fee.FeeMetadata;
-import io.hypersistence.utils.hibernate.type.json.JsonType;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public class AbstractFeeMetadata implements FeeMetadata {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String description;
     private boolean compulsory;
-    @Type(JsonType.class)
+    @JdbcTypeCode(SqlTypes.JSON)
     private FeeFormula formula;
     
     public AbstractFeeMetadata() {

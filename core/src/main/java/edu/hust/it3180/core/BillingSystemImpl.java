@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 
@@ -17,13 +20,14 @@ import edu.hust.it3180.billing.ApartmentBillingStatus;
 import edu.hust.it3180.billing.Bill;
 import edu.hust.it3180.billing.BillingPeriod;
 import edu.hust.it3180.billing.fee.FeeMetadata;
-import edu.hust.it3180.billing.fee.RecurringFee;
 import edu.hust.it3180.billing.payment.Payment;
 import edu.hust.it3180.core.apartment.ApartmentRepository;
 import edu.hust.it3180.core.apartment.DefaultApartment;
 import edu.hust.it3180.core.billing.*;
 import edu.hust.it3180.core.billing.fee.*;
 
+@Component
+@Transactional
 public class BillingSystemImpl implements BillingSystem {
     
     private final ApartmentRepository apartmentRepository;
@@ -86,15 +90,21 @@ public class BillingSystemImpl implements BillingSystem {
     public void issueBills() {
         var lastPeriod = lastCalculated();
         if (lastPeriod.compareTo(MonthlyBillingPeriod.current()) >= 0) {
+            System.out.println("Skipping");
             return;
         }
         var statuses = statusRepository.findAll();
         for (var billStatus : statuses) {
             for (var period : lastPeriod.nextUntil(MonthlyBillingPeriod.CURRENT)) {
-                List<Bill> newBills = calculateBillsFor(billStatus, period);
+                List<DefaultBill> newBills = calculateBillsFor(billStatus, period);
+                newBills = billRepository.saveAll(newBills);
                 billStatus.addBills(newBills);
             }
         }
+        
+        // BillingSystemMetadata systemMetadata =
+        // metadataRepository.findById(BillingSystemMetadata.CURRENT_VERSION).get();
+        // systemMetadata.setLastCalculated(LocalDate.now());
     }
     
     @Override
@@ -124,7 +134,7 @@ public class BillingSystemImpl implements BillingSystem {
     public void applyFee(FeeMetadata fee, Predicate<Apartment> whichApartment) {
         FeeMetadata metadata = switch (fee) {
         case OneTimeFee f -> oneTimeFeeRepository.save(f);
-        case RecurringFee f -> recurringFeeRepository.save(f);
+        case DefaultRecurringFee f -> recurringFeeRepository.save(f);
         default -> throw new IllegalArgumentException("Unknown FeeMetadata implementation");
         };
         final var internalFee = feeRepository.save(new Fee(metadata, MonthlyBillingPeriod.CURRENT, null));
@@ -133,11 +143,6 @@ public class BillingSystemImpl implements BillingSystem {
             .filter(st -> whichApartment.test(st.getApartment()))
             .toList();
         affected.forEach(st -> st.fees().add(internalFee));
-
-        if (metadata instanceof RecurringFee) {
-            DefaultSubscription subscription = new DefaultSubscription();
-            
-        }
         
         statusRepository.saveAll(affected);
         
@@ -171,7 +176,7 @@ public class BillingSystemImpl implements BillingSystem {
     /**
      * Get all new bills for apartments, given the BillingPeriod.
      */
-    private List<Bill> calculateBillsFor(DefaultApartmentBillingStatus status, MonthlyBillingPeriod period) {
+    private List<DefaultBill> calculateBillsFor(DefaultApartmentBillingStatus status, MonthlyBillingPeriod period) {
         return status.fees()
             .stream()
             .filter(fee -> fee.isApplied(period))
@@ -180,5 +185,4 @@ public class BillingSystemImpl implements BillingSystem {
                     new DefaultBill(fee, fee.getMetadata().formula().calculate(status.getApartment()), period)),
                 (l1, l2) -> l1.addAll(l2));
     }
-    
 }

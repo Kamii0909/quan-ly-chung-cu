@@ -30,6 +30,11 @@ public class DefaultApartmentPosition implements ApartmentPosition {
         }
     }
     
+    
+    public DefaultApartmentPosition() {
+    }
+
+
     public DefaultApartmentPosition(List<Integer> floors, String id, String room, String type) {
         this.floors = floors;
         this.roomId = id;

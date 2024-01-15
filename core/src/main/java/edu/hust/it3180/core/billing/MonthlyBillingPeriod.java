@@ -55,14 +55,14 @@ public class MonthlyBillingPeriod implements BillingPeriod {
     }
     
     public Iterable<MonthlyBillingPeriod> nextUntil(MonthlyBillingPeriod finalPeriod) {
+        MonthlyBillingPeriod start = this;
         return () -> new AbstractIterator<MonthlyBillingPeriod>() {
-            private MonthlyBillingPeriod last = finalPeriod;
+            private MonthlyBillingPeriod last = start;
             
             @Override
             protected MonthlyBillingPeriod computeNext() {
-                if (last.compareTo(finalPeriod) >= 0) {
-                    endOfData();
-                    return null;
+                if (last.compareTo(finalPeriod) > 0) {
+                    return endOfData();
                 }
                 return (last = last.next());
             }
@@ -120,7 +120,7 @@ public class MonthlyBillingPeriod implements BillingPeriod {
     public int compareTo(BillingPeriod o) {
         if (o instanceof MonthlyBillingPeriod mbp) {
             var yCmp = Integer.compare(this.year, mbp.year);
-            return yCmp == 0 ? yCmp : Integer.compare(this.month, mbp.month);
+            return yCmp != 0 ? yCmp : Integer.compare(this.month, mbp.month);
         }
         throw new UnsupportedOperationException("o is not MonthlyBillingPeriod");
     }

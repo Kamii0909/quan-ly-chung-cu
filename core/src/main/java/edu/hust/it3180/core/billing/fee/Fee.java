@@ -15,11 +15,11 @@ import jakarta.persistence.*;
 @Table(name = "fees")
 public class Fee {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Any
     @AnyDiscriminator(DiscriminatorType.STRING)
-    @AnyDiscriminatorValue(discriminator = "R", entity = RecurringFee.class)
+    @AnyDiscriminatorValue(discriminator = "R", entity = DefaultRecurringFee.class)
     @AnyDiscriminatorValue(discriminator = "O", entity = OneTimeFee.class)
     @AnyKeyJavaClass(Long.class)
     @Column(name = "fee_type")

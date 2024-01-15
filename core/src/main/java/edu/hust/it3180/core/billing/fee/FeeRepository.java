@@ -8,14 +8,14 @@ import org.springframework.data.repository.query.Param;
 
 public interface FeeRepository extends JpaRepository<Fee, Long> {
     @Query(value = """
-            SELECT * FROM FeeDuration fd
-            WHERE fd.to_month < :month AND fd.to_year < :year
+            SELECT fd FROM Fee fd
+            WHERE fd.to.month < :month AND fd.to.year < :year
         """)
     List<Fee> inBillingPeriod(@Param("year") int year, @Param("month") int month);
 
     @Query("""
-            SELECT * FROM FeeDuration fd
-            WHERE fd.fee_id IN :feeIds
+            SELECT fd FROM Fee fd
+            WHERE fd.metadata IN :feeIds
             """)
     List<Fee> findByFeeId(@Param("feeIds") List<Long> feeIds);
 }
